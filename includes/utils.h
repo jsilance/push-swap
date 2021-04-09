@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 17:31:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2021/04/09 06:32:51 by jsilance         ###   ########.fr       */
+/*   Created: 2021/04/09 04:48:13 by jsilance          #+#    #+#             */
+/*   Updated: 2021/04/09 05:21:11 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#ifndef UTILS_H
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
-{
-	if (!lst || !del)
-		return ;
-	// del(lst->content);
-	free(lst);
-}
-/*
-** Libérer la mémoire d'un élément d'une liste chainée
-** sans free la mémoire de next
-*/
+# define UTILS_H
+# include "list.h"
+# include "unistd.h"
+
+void	ft_putstruct(t_list *alst, t_list *blst);
+int		ft_strcmp(const char *s1, const char *s2);
+
+#endif

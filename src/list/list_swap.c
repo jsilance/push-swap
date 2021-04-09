@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:41:31 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/09 02:54:59 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/09 06:24:12 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 int	lst_swap(t_list **lst)
 {
-	t_list	*lst_tmp;
+	t_list	*tmpa;
+	t_list	*tmpb;
+	t_list	*tmpc;
 
-	lst_tmp = NULL;
 	if (!lst || !*lst || !(*lst)->next)
 		return (1);
-	lst_move(&(*lst), &(*lst)->next);
+	tmpa = *lst;
+	tmpb = (*lst)->next;
+	tmpc = tmpb->next;
+	tmpa->next = tmpc;
+	tmpb->next = tmpa;
+	*lst = tmpb;
 	return (0);
 }

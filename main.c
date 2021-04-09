@@ -6,11 +6,14 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:23:59 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/09 03:25:00 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/09 06:35:49 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+#include "utils.h"
+#include "get_next_line.h"
+
 #include <stdio.h>
 
 #define	PS(stack) _print_stack(stack, #stack);
@@ -39,25 +42,37 @@ static void	_print_stack(t_list *stack, const char *name)
 int	main(int argc, char **argv)
 {
 	t_list	*a;
+	t_list	*b;
+	int		ret;
+	char	*buf;
 
 	a = NULL;
+	b = NULL;
 	for (int i = 0; i < argc - 1; i++)
 		ft_lstadd_back(&a, ft_lstnew(argv[i + 1]));
-	// PS(a);
-	// PS(b);
-
-	t_list	*b;
-	b = NULL;
-
-	for (int i = 0; i < argc - 1; i++)
+	write(1, "\nInit a and b:\n", 15);
+	ft_putstruct(a, b);
+	while ((ret = get_next_line(0, &buf)) > 0)
 	{
-// DE(a);
-// DE(&a);
-// DE(b);
-		lst_push(&a, &b, I_PB);
-		// PS(b);
+		if (!ft_strcmp(buf, "sa"))
+			lst_swap(&a);
+		else if (!ft_strcmp(buf, "sb"))
+			lst_swap(&b);
+		else if (!ft_strcmp(buf, "ss"))
+		{
+			lst_swap(&a);
+			lst_swap(&b);
+		}
+		else if (!ft_strcmp(buf, "pa"))
+			lst_push(&a, &b, I_PA);
+		else if (!ft_strcmp(buf, "pb"))
+			lst_push(&a, &b, I_PB);
+		free(buf);
+		ft_putstruct(a, b);
 	}
-	// ft_lstclear(&a, &free);
-	// ft_lstclear(&b, &free);
+	if (buf)
+		free(buf);
+	ft_lstclear(&a, &free);
+	ft_lstclear(&b, &free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/04/09 03:05:40 by jsilance         ###   ########.fr        #
+#    Updated: 2021/04/09 05:31:19 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ ARFLAGS = -rcs
 
 # Debug, use with`make DEBUG=1`
 ifeq ($(DEBUG),1)
-# CFLAGS	+= -g3 -fsanitize=address
-CFLAGS	+= -g3
+CFLAGS	+= -g3 -fsanitize=address
+# CFLAGS	+= -g3
 endif
 
 # Folder name
@@ -46,6 +46,8 @@ LDFLAGS =
 
 SRCS =\
 	./src/io/get_next_line.c\
+	./src/utils/utils.c\
+	./src/print/ft_putstruct.c\
 	./src/list/ft_lstlast.c\
 	./src/list/ft_lstadd_front.c\
 	./src/list/ft_lstadd_back.c\
@@ -61,6 +63,7 @@ SRCS =\
 HEADERS =\
 	./includes/get_next_line.h\
 	./includes/list.h\
+	./includes/utils.h\
 	./includes/debug_utils.h\
 
 ###▲▲▲<src-updater-do-not-edit-or-remove>▲▲▲
