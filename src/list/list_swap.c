@@ -6,13 +6,13 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:41:31 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/09 06:24:12 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/10 01:59:58 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-int	lst_swap(t_list **lst)
+static int	lst_swap(t_list **lst)
 {
 	t_list	*tmpa;
 	t_list	*tmpb;
@@ -27,4 +27,12 @@ int	lst_swap(t_list **lst)
 	tmpb->next = tmpa;
 	*lst = tmpb;
 	return (0);
+}
+
+int	i_swap(t_list **alst, t_list **blst, int ins)
+{
+	if (ins == I_SA || ins == I_SS)
+		lst_swap(alst);
+	if (ins == I_SB || ins == I_SS)
+		lst_swap(blst);
 }

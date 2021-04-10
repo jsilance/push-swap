@@ -52,12 +52,12 @@ SRCS =\
 	./src/list/ft_lstadd_front.c\
 	./src/list/ft_lstadd_back.c\
 	./src/list/ft_lstclear.c\
-	./src/list/lst_move.c\
 	./src/list/list_swap.c\
 	./src/list/lst_push.c\
 	./src/list/ft_lstnew.c\
 	./src/list/ft_lstiter.c\
 	./src/list/ft_lstdelone.c\
+	./src/list/lst_rot.c\
 	./src/list/ft_lstsize.c\
 
 HEADERS =\
