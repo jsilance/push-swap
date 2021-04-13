@@ -6,13 +6,14 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:28:57 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/10 02:23:06 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/13 01:23:17 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIST_H
 # define LIST_H
 # include <stdlib.h>
+
 typedef struct s_list
 {
 	int				content;
@@ -26,6 +27,7 @@ typedef struct s_table_v
 	t_list	*a;
 	t_list	*b;
 	char	*buf;
+	char	**tab;
 }			t_table_v;
 
 enum

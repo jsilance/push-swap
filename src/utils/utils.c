@@ -6,11 +6,13 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 05:20:08 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/10 02:27:16 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/13 02:42:05 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+#include "debug_utils.h" // TOUT DOUX RIMAUVE BYFOURE PEUCHE
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -50,4 +52,55 @@ int	ft_atoi(char *s)
 	if (!n[1])
 		return (n[0]);
 	return (-n[0]);
+}
+
+static int	str_is_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (1);
+	while (str[i])
+	{
+		if (str[i] && (str[i] < '0' || str[i] > '9') && str[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	tab_to_lst(t_table_v *var, char **tab)
+{
+	int	i;
+
+	i = 1;
+	if (!tab || !*tab || !&var->a)
+		return (1);
+	while (tab[i])
+	{
+		if (str_is_digit(tab[i]))
+			return (1);
+		ft_lstadd_back(&var->a, ft_lstnew(ft_atoi(tab[i])));
+		i++;
+	}
+	return (0);
+}
+
+int	str_to_lst(t_table_v *var, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str || !*str || !&var->a || str_is_digit(str))
+		return (1);
+	while (*str)
+	{
+		ft_lstadd_back(&var->a, ft_lstnew(ft_atoi(str)));
+		while (*str && *str != ' ')
+			str++;
+		if (*str)
+			str++;
+	}
+	return (0);
 }
