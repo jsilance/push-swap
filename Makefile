@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/04/09 05:31:19 by jsilance         ###   ########.fr        #
+#    Updated: 2021/04/13 03:13:44 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 # The name of your executable
 NAME		= library.a
-NAME_EXE	= push_swap
+NAME_EXE	= checker
 
 # Compiler and compiling flags
 CC	= gcc
