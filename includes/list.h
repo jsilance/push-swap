@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:28:57 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/13 01:23:17 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:00:26 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_table_v
 	t_list	*b;
 	char	*buf;
 	char	**tab;
+	int		ret_val;
 }			t_table_v;
 
 enum

@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/04/13 03:13:44 by jsilance         ###   ########.fr        #
+#    Updated: 2021/04/13 20:34:47 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 
 # The name of your executable
 NAME		= library.a
-NAME_EXE	= checker
+NAME_CHECK	= checker
+NAME_SWAP	= push_swap
 
 # Compiler and compiling flags
 CC	= gcc
@@ -112,11 +113,16 @@ fclean : clean
 # Special rule to force to remake everything
 re : fclean all
 
+swap: $(NAME)
+	$(CC) $(CFLAGS) src/swap/main.c $(NAME) -o $(NAME_SWAP)
+
+checker: $(NAME)
+	$(CC) $(CFLAGS) src/checker/main.c $(NAME) -o $(NAME_CHECK)
+
 # This runs the program
-run : $(NAME)
+run : swap checker
 	@echo "$(CY)>>> Running $(NAME)$(RC)"
-	$(CC) $(CFLAGS) main.c $(NAME) -o $(NAME_EXE)
-	./$(NAME_EXE)
+	./$(NAME_SWAP) $(ARG) | ./$(NAME_CHECK) $(ARG)
 
 # This specifies the rules that does not correspond to any filename
 .PHONY	= all run clean fclean re
