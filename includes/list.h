@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:28:57 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/13 22:00:26 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/15 19:55:44 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ typedef struct s_list
 	int				content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_swap
+{
+	int				success;
+	int				max_ins;
+	t_list			*lst;
+	t_list			*ins;
+	int				fd;
+}					t_swap;
 
 typedef struct s_table_v
 {
@@ -59,5 +68,6 @@ void	ft_lstiter(t_list *lst, void (*f)(int));
 int		i_swap(t_list **alst, t_list **blst, int ins);
 int		i_rot(t_list **alst, t_list **blst, int ins);
 int		i_push(t_list **alst, t_list **blst, int ins);
+t_list	*lst_dup(t_list *lst);
 
 #endif

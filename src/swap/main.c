@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:13:12 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/14 00:03:08 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:03:23 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,12 @@ static int	executor(t_list **alst, t_list **blst, int ins)
 	return (0);
 }
 
-static int	print_ret(char *str, int ret)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	if (i > 3)
-		write(2, str, i);
-	else
-		write(1, str, i);
-	return (ret);
-}
-
 int	*sort_table(t_table_v *var, int range)
 {
 	t_list	*ptr;
 	t_list	*ptr1;
-	int		tab[range];
 
+	(void)range;
 	ptr = var->a;
 	range = ft_lstsize(ptr);
 	while (ptr)
@@ -65,7 +51,9 @@ int	main(int argc, char **argv)
 {
 	t_table_v	var;
 
-	var = (t_table_v){0, 1, NULL, NULL, NULL, arg_lst(&var, argc, argv)};
+	var = (t_table_v){0, 1, NULL, NULL, NULL, NULL, 0};
+	var.ret_val = arg_lst(&var, argc, argv);
+	print_ret("YOLO\n", 1);
 	if (var.ret_val)
 		return (var.ret_val);
 	if (!var.a && !var.b)

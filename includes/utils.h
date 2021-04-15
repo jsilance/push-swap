@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 04:48:13 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/13 21:06:05 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/15 21:47:26 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ int		tab_to_lst(t_table_v *var, char **tab);
 
 void	free_exit(t_table_v *var);
 int		verif_stack(t_table_v *var, int mod);
+int		arg_lst(t_table_v *var, int argc, char **argv);
+size_t	ft_strlen(char *str);
+int		print_ret(char *str, int ret);
 
 #endif

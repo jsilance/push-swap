@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 05:20:08 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/13 02:42:05 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/15 21:30:16 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ int	tab_to_lst(t_table_v *var, char **tab)
 	int	i;
 
 	i = 1;
-	if (!tab || !*tab || !&var->a)
+	if (!tab || !*tab || !var->a)
 		return (1);
 	while (tab[i])
 	{
 		if (str_is_digit(tab[i]))
 			return (1);
-		ft_lstadd_back(&var->a, ft_lstnew(ft_atoi(tab[i])));
+		ft_lstadd_back(var->a, ft_lstnew(ft_atoi(tab[i])));
 		i++;
 	}
 	return (0);
@@ -89,14 +89,15 @@ int	tab_to_lst(t_table_v *var, char **tab)
 
 int	str_to_lst(t_table_v *var, char *str)
 {
-	int	i;
+	int		i;
+	t_list	*ptr;
 
 	i = 0;
-	if (!str || !*str || !&var->a || str_is_digit(str))
+	if (!str || !*str || !var->a || str_is_digit(str))
 		return (1);
 	while (*str)
 	{
-		ft_lstadd_back(&var->a, ft_lstnew(ft_atoi(str)));
+		ft_lstadd_back(var->a, ft_lstnew(ft_atoi(str)));
 		while (*str && *str != ' ')
 			str++;
 		if (*str)

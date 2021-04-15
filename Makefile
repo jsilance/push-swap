@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/04/13 20:34:47 by jsilance         ###   ########.fr        #
+#    Updated: 2021/04/15 18:59:40 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ LDFLAGS =
 SRCS =\
 	./src/io/get_next_line.c\
 	./src/utils/utils.c\
+	./src/utils/utils2.c\
 	./src/print/ft_putstruct.c\
 	./src/list/ft_lstlast.c\
 	./src/list/ft_lstadd_front.c\
@@ -55,11 +56,13 @@ SRCS =\
 	./src/list/ft_lstclear.c\
 	./src/list/list_swap.c\
 	./src/list/lst_push.c\
+	./src/list/lst_dup.c\
 	./src/list/ft_lstnew.c\
 	./src/list/ft_lstiter.c\
 	./src/list/ft_lstdelone.c\
 	./src/list/lst_rot.c\
 	./src/list/ft_lstsize.c\
+	./src/swap/swapper.c\
 
 HEADERS =\
 	./includes/get_next_line.h\

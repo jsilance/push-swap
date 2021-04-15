@@ -6,21 +6,11 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 04:51:22 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/09 23:28:11 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/15 18:58:20 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
-static size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str && *str++)
-		i++;
-	return (i);
-}
 
 static void	ft_putchar(char c)
 {
