@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:23:59 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/13 21:46:30 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/16 17:03:27 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,6 @@ static void    _print_stack(t_list *stack, const char *name)
 		stack = stack->next;
 	}
 	printf("=== =END= > len %ld <\n", size);
-}
-
-
-static int	executor(t_list **alst, t_list **blst, int ins)
-{
-	static	int	(*ins_table[N_INSTR])(t_list **, t_list **, int) = {
-		i_swap, i_swap, i_swap,
-		i_push, i_push,
-		i_rot, i_rot, i_rot, i_rot, i_rot, i_rot};
-
-	if (ins < 0 || ins > N_INSTR - 1)
-		return (1);
-	ins_table[ins](alst, blst, ins);
-	return (0);
 }
 
 static int	parser_ins(char *str)

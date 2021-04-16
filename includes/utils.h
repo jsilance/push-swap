@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 04:48:13 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/15 21:47:26 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/16 17:03:12 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define UTILS_H
 # include "list.h"
 # include "unistd.h"
+
+# include <stdio.h>
 
 # define N_INSTR 11
 
@@ -29,5 +31,10 @@ int		verif_stack(t_table_v *var, int mod);
 int		arg_lst(t_table_v *var, int argc, char **argv);
 size_t	ft_strlen(char *str);
 int		print_ret(char *str, int ret);
+
+int		dis_factor_a(t_list *lst);
+int		dis_factor_b(t_list *lst);
+int		executor(t_list **alst, t_list **blst, int ins);
+int		main_swap(t_table_v *var);
 
 #endif

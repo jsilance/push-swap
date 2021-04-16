@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 21:03:27 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/15 21:57:56 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/16 17:31:24 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	free_exit(t_table_v *var)
 		ft_lstclear(&var->a);
 	if (var->b)
 		ft_lstclear(&var->b);
+	if (var->tab)
+	{
+		while (var->tab && *var->tab)
+			free(*var->tab);
+		var->tab = NULL;
+	}
 }
 
 int	verif_stack(t_table_v *var, int mod)
@@ -51,9 +57,10 @@ int	arg_lst(t_table_v *var, int argc, char **argv)
 		if (str_to_lst(var, argv[1]))
 			return (print_ret("Error\n", 1));
 	}
-	else
-		if (tab_to_lst(var, argv))
-			return (print_ret("Error\n", 1));
+	else if (tab_to_lst(var, argv))
+		return (print_ret("Error\n", 1));
+// printf("A[%p]	B[%p]\n", var->a, var->b);
+// printf("****ICI TOUT VA BIEN****[%d]\n", argc);
 	return (0);
 }
 

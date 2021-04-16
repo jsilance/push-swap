@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:28:57 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/15 19:55:44 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:52:40 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ typedef struct s_list
 
 typedef struct s_swap
 {
-	int				success;
-	int				max_ins;
-	t_list			*lst;
-	t_list			*ins;
-	int				fd;
+	int		success;
+	t_list	*lsta;
+	t_list	*lstb;
+	t_list	*ins;
+	int		dis_factor[2];	
+	int		dis_factor_old[2];	
 }					t_swap;
 
 typedef struct s_table_v
@@ -39,6 +40,12 @@ typedef struct s_table_v
 	char	**tab;
 	int		ret_val;
 }			t_table_v;
+
+enum
+{
+	S_A,
+	S_B
+};
 
 enum
 {

@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/04/15 18:59:40 by jsilance         ###   ########.fr        #
+#    Updated: 2021/04/16 15:27:01 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ LDFLAGS =
 
 SRCS =\
 	./src/io/get_next_line.c\
+	./src/utils/utils3.c\
 	./src/utils/utils.c\
 	./src/utils/utils2.c\
 	./src/print/ft_putstruct.c\
