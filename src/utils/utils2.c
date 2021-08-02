@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 21:03:27 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/16 17:31:24 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/02 16:13:32 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	free_exit(t_table_v *var)
 	}
 }
 
-int	verif_stack(t_table_v *var, int mod)
+int	verif_stack(t_list *lst, int mod)
 {
 	t_list	*ptr;
 	t_list	*ptr1;
 
-	ptr = var->a;
+	ptr = lst;
 	while (ptr)
 	{
 		ptr1 = ptr->next;
@@ -50,18 +50,26 @@ int	verif_stack(t_table_v *var, int mod)
 	return (0);
 }
 
-int	arg_lst(t_table_v *var, int argc, char **argv)
+int	arg_lst(int c, int ac, char **ag, t_list **a)
 {
-	if (argc == 2)
-	{	
-		if (str_to_lst(var, argv[1]))
-			return (print_ret("Error\n", 1));
+	int	i;
+	int	j;
+	int	value;
+
+	i = 0;
+	while (++i <= c)
+	{
+		value = ft_atoi(ag[i]);
+		ft_lstnew(a, value);
+		j = i + 1;
+		while (j < ac)
+		{
+			if (value == ft_atoi(ag[j]))
+				return (0);
+			j++;
+		}
 	}
-	else if (tab_to_lst(var, argv))
-		return (print_ret("Error\n", 1));
-// printf("A[%p]	B[%p]\n", var->a, var->b);
-// printf("****ICI TOUT VA BIEN****[%d]\n", argc);
-	return (0);
+	return (1);
 }
 
 size_t	ft_strlen(char *str)

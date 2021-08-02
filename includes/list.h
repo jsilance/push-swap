@@ -6,28 +6,29 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 00:28:57 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/16 16:52:40 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/02 17:28:26 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIST_H
 # define LIST_H
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
 	int				content;
+	int				pos;
+	struct s_list	*prev;
 	struct s_list	*next;
 }					t_list;
 
 typedef struct s_swap
 {
-	int		success;
 	t_list	*lsta;
 	t_list	*lstb;
-	t_list	*ins;
-	int		dis_factor[2];	
-	int		dis_factor_old[2];	
+	int		mid;
+	int		len;
 }					t_swap;
 
 typedef struct s_table_v
@@ -37,8 +38,8 @@ typedef struct s_table_v
 	t_list	*a;
 	t_list	*b;
 	char	*buf;
-	char	**tab;
 	int		ret_val;
+	char	**tab;
 }			t_table_v;
 
 enum
@@ -64,7 +65,7 @@ enum
 	I_DO
 };
 
-t_list	*ft_lstnew(int content);
+void	ft_lstnew(t_list **lst, int content);
 t_list	*ft_lstlast(t_list *lst);
 int		ft_lstsize(t_list *lst);
 void	ft_lstadd_front(t_list **alst, t_list *new);
@@ -72,9 +73,11 @@ void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstdelone(t_list *lst);
 void	ft_lstclear(t_list **lst);
 void	ft_lstiter(t_list *lst, void (*f)(int));
-int		i_swap(t_list **alst, t_list **blst, int ins);
-int		i_rot(t_list **alst, t_list **blst, int ins);
-int		i_push(t_list **alst, t_list **blst, int ins);
+int		i_swap(t_list *lst, int ins);
+int		i_rrot(t_list **lst, int ins);
+int		i_rot(t_list **lst, int ins);
+void	i_push(t_list **lst, int content, int ins);
+void	i_pop(t_list **lst, int content);
 t_list	*lst_dup(t_list *lst);
 
 #endif

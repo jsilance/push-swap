@@ -6,53 +6,76 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 12:19:45 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/10 02:23:56 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/02 16:49:01 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-static t_list	*lst_get_n(t_list *lst, int n)
+static void	lst_rrot(t_list **lst)
 {
-	if (!lst)
-		return (0);
-	while (lst && lst->next && --n)
-		lst = lst->next;
-	return (lst);
+	t_list	*first;
+	t_list	*last;
+
+	if (!*lst)
+		return ;
+	while (*lst && (*lst)->next)
+		*lst = (*lst)->next;
+	last = *lst;
+	if (!(*lst)->prev)
+		return ;
+	last->prev->next = 0;
+	first = (*lst)->prev;
+	*lst = last;
+	while (first && first->prev)
+		first = first->prev;
+	first->prev = last;
+	last->next = first;
+	last->prev = 0;
 }
 
-static int	lst_rot(t_list **lst, int param)
+int	i_rrot(t_list **lst, int ins)
 {
-	t_list	*tmpa;
-
-	if (!lst || !*lst || !(*lst)->next)
-		return (1);
-	if (param == I_UP)
-	{
-		tmpa = *lst;
-		*lst = (*lst)->next;
-		ft_lstlast(*lst)->next = tmpa;
-		tmpa->next = NULL;
-	}
-	else if (param == I_DO)
-	{
-		tmpa = ft_lstlast(*lst);
-		lst_get_n(*lst, ft_lstsize(*lst) - 1)->next = NULL;
-		tmpa->next = *lst;
-		*lst = tmpa;
-	}
+	lst_rrot(lst);
+	if (ins == I_RRA)
+		write(1, "rra\n", 4);
+	if (ins == I_RRB)
+		write(1, "rrb\n", 4);
+	if (ins == I_RRR)
+		write(1, "rrr\n", 4);
 	return (0);
 }
 
-int	i_rot(t_list **alst, t_list **blst, int ins)
+static void	lst_rot(t_list **lst)
 {
-	if (ins == I_RA || ins == I_RR)
-		lst_rot(alst, I_UP);
-	if (ins == I_RB || ins == I_RR)
-		lst_rot(blst, I_UP);
-	if (ins == I_RRA || ins == I_RRR)
-		lst_rot(alst, I_DO);
-	if (ins == I_RRB || ins == I_RRR)
-		lst_rot(blst, I_DO);
+	t_list	*first;
+	t_list	*last;
+
+	if (!lst)
+		return ;
+	while (lst && (*lst)->prev)
+		*lst = (*lst)->prev;
+	last = *lst;
+	if (!(*lst)->next)
+		return ;
+	first = (*lst)->next;
+	*lst = first;
+	first->prev = 0;
+	while (first && first->next)
+		first = first->next;
+	first->next = last;
+	last->next = 0;
+	last->prev = first;
+}
+
+int	i_rot(t_list **lst, int ins)
+{
+	lst_rot(lst);
+	if (ins == I_RA)
+		write(1, "ra\n", 3);
+	if (ins == I_RB)
+		write(1, "rb\n", 3);
+	if (ins == I_RR)
+		write(1, "rr\n", 3);
 	return (0);
 }

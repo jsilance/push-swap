@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/04/16 15:27:01 by jsilance         ###   ########.fr        #
+#    Updated: 2021/08/02 19:14:23 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@
 
 # The name of your executable
 NAME		= library.a
-NAME_CHECK	= checker
 NAME_SWAP	= push_swap
 
 # Compiler and compiling flags
@@ -47,9 +46,11 @@ LDFLAGS =
 
 SRCS =\
 	./src/io/get_next_line.c\
-	./src/utils/utils3.c\
+	./src/utils/swap_utils3.c\
 	./src/utils/utils.c\
 	./src/utils/utils2.c\
+	./src/utils/swap_utils2.c\
+	./src/utils/swap_utils.c\
 	./src/print/ft_putstruct.c\
 	./src/list/ft_lstlast.c\
 	./src/list/ft_lstadd_front.c\
@@ -63,6 +64,7 @@ SRCS =\
 	./src/list/ft_lstdelone.c\
 	./src/list/lst_rot.c\
 	./src/list/ft_lstsize.c\
+	./src/swap/main.c\
 	./src/swap/swapper.c\
 
 HEADERS =\
@@ -90,7 +92,7 @@ VPATH := $(SRCDIR) $(OBJDIR) $(shell find $(SRCDIR) -type d)
 
 # ================================== RULES =================================== #
 
-all : $(NAME)
+all : $(NAME) $(NAME_CHECK)
 
 # Compiling
 $(OBJDIR)%.o : %.c
@@ -119,9 +121,6 @@ re : fclean all
 
 swap: $(NAME)
 	$(CC) $(CFLAGS) src/swap/main.c $(NAME) -o $(NAME_SWAP)
-
-checker: $(NAME)
-	$(CC) $(CFLAGS) src/checker/main.c $(NAME) -o $(NAME_CHECK)
 
 # This runs the program
 run : swap checker

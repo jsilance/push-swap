@@ -6,94 +6,92 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 14:17:20 by jsilance          #+#    #+#             */
-/*   Updated: 2021/04/16 21:39:09 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/02 19:18:57 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include "utils.h"
 
-#include <fcntl.h>
-
-// static t_swap	*swap_finder(t_swap	*ptr, int ins, int max_ins)
-// {
-// 	static char	*str_ins[11] = {
-// 	"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-
-// 	if (max_ins <= 0)
-// 		return (NULL);
-// 	max_ins--;
-// 	swap_finder(ptr, I_SA, max_ins);
-// 	swap_finder(ptr, I_RA, max_ins);
-// 	swap_finder(ptr, I_RRA, max_ins);
-// 	if (max_ins <= 0)
-// 	{
-// 		ptr->success = 0;
-// 		return (ptr);
-// 	}
-// }
-
-static int	compute_exec(t_swap *ptr, int ins)
+void	trash_list(t_list **lsta, t_list **lstb)
 {
-	ptr->dis_factor_old[0] = ptr->dis_factor[0];
-	ptr->dis_factor_old[1] = ptr->dis_factor[1];
-	executor(&ptr->lsta, &ptr->lstb, ins);
-	ptr->dis_factor[0] = dis_factor_a(ptr->lsta);
-	ptr->dis_factor[1] = dis_factor_a(ptr->lstb);
-	// printf("[%d][%d]\n[%d][%d]\n\n", ptr->dis_factor_old[0], ptr->dis_factor[0], ptr->dis_factor_old[1], ptr->dis_factor[1]);
-	return (0);
+	while (*lstb)
+	{
+		i_push(lsta, (*lstb)->content, I_PA);
+		i_pop(lstb, (*lstb)->content);
+	}
 }
 
-static int	compute_ins(t_swap *ptr, t_table_v *var)
+static void	small_ins(t_list **lsta, t_list **lstb)
 {
+	if (*lstb && (*lstb)->next && (*lstb)->content
+		< (*lstb)->next->content)
+		i_swap(*lstb, I_SB);
+	else if (*lstb && !descend(*lstb) && (*lstb)->content
+		> ft_lstlast(*lstb)->content)
+		i_rrot(lstb, I_RRB);
+	else if (*lstb && !descend(*lstb) && (*lstb)->content
+		< ft_lstlast(*lstb)->content)
+		i_rot(lstb, I_RRB);
+}
+
+static void	small_sort(t_list **lsta, t_list **lstb, int mid, int l)
+{
+	while (lsta && *lsta && n_sorted(*lsta, mid, l))
+	{
+		if (lsta && *lsta && (*lsta)->next && to_swap(lsta, mid, l))
+			i_swap(*lsta, I_SA);
+		while (l != 3 && lsta && *lsta && n_sorted(*lsta, mid, l)
+			&& (*lsta)->content < mid)
+		{
+			i_push(lstb, (*lsta)->content, I_PB);
+			i_pop(lsta, (*lsta)->content);
+			small_ins(lsta, lstb);
+		}
+		if (ft_lstsize(*lsta) != 3)
+			sort_five(lsta, mid, l);
+		else
+			sort_three(lsta, mid, l);
+	}
+	trash_list(lsta, lstb);
+}
+
+static void	large_sort(t_list **alst, t_list **blst)
+{
+	int	lst;
 	int	i;
 
 	i = 0;
-	printf("1[%d]\n", (ptr->lsta || ptr->lstb) && verif_stack(var, 1));
-	while ((ptr->lsta || ptr->lstb) && verif_stack(var, 1))
+	normalize_lst(alst);
+	while (alst && *alst && verif_stack(*alst, 1))
 	{
-		// printf("*1*[%d][%d]**\n", (ptr->lsta || ptr->lstb), verif_stack(var, 1));
-		ft_putstruct(ptr->lsta, ptr->lstb);
-		if (ptr->dis_factor[0] || ptr->dis_factor[1])
-			compute_exec(ptr, I_SA);
-		if (ptr->dis_factor[0] || ptr->dis_factor[1])
-			if (ptr->dis_factor_old[0] < ptr->dis_factor[0] || ptr->dis_factor_old[1] < ptr->dis_factor[1])
-				executor(&ptr->lsta, &ptr->lstb, I_SA);
-		// ft_putstruct(ptr->lsta, ptr->lstb);
-		// printf("*2*[%d][%d]**\n", (ptr->lsta || ptr->lstb), verif_stack(var, 1));
-		// ft_putstruct(ptr->lsta, ptr->lstb);
-		if (ptr->dis_factor[0] || ptr->dis_factor[1])
-			compute_exec(ptr, I_RA);
-		if (ptr->dis_factor[0] || ptr->dis_factor[1])
-			if (ptr->dis_factor_old[0] < ptr->dis_factor[0] || ptr->dis_factor_old[1] < ptr->dis_factor[1])
-				executor(&ptr->lsta, &ptr->lstb, I_RRA);
-		// printf("*3*[%d][%d]**\n", (ptr->lsta || ptr->lstb), verif_stack(var, 1));
-		// ft_putstruct(ptr->lsta, ptr->lstb);
-		if (ptr->dis_factor[0] || ptr->dis_factor[1])
-			compute_exec(ptr, I_RRA);
-		if (ptr->dis_factor[0] || ptr->dis_factor[1])
-			if (ptr->dis_factor_old[0] < ptr->dis_factor[0] || ptr->dis_factor_old[1] < ptr->dis_factor[1])
-				executor(&ptr->lsta, &ptr->lstb, I_RA);
-		// ft_putstruct(ptr->lsta, ptr->lstb);
-		// printf("*4*[%d][%d]**\n", (ptr->lsta || ptr->lstb), verif_stack(var, 1));
-		var->a = ptr->lsta;
-		var->b = ptr->lstb;
+		lst = ft_lstsize(*alst);
+		while (alst && *alst && lst--)
+		{
+			if ((((*alst)->content >> i) & 1))
+				i_rot(alst, I_RA);
+			else
+			{
+				i_push(blst, (*alst)->content, I_PB);
+				i_pop(alst, (*alst)->content);
+			}
+		}
+		trash_list(alst, blst);
+		i++;
 	}
-		// ft_putstruct(ptr->lsta, ptr->lstb);
 }
 
 int	main_swap(t_table_v *var)
 {
 	t_swap	ptr;
 
-	ptr = (t_swap){0, var->a, var->b, NULL};
-	ptr.dis_factor[0] = dis_factor_a(var->a);
-	ptr.dis_factor[1] = dis_factor_b(var->b);
-	ptr.dis_factor_old[0] = 0;
-	ptr.dis_factor_old[1] = 0;
-	printf("disA[%d]	disB[%d]\n", ptr.dis_factor[0], ptr.dis_factor[1]);
-	compute_ins(&ptr, var);
-	printf("disA[%d]	disB[%d]\n", ptr.dis_factor[0], ptr.dis_factor[1]);
-	ft_putstruct(ptr.lsta, ptr.lstb);
-	// swap_finder(&ptr, I_SA, ft_lstsize(var->a) * 3 / 2 + 1);
+	if (!var->b && !verif_stack(var->a, 1))
+		return (1);
+	ptr = (t_swap){var->a, var->b};
+	ptr.len = ft_lstsize(ptr.lsta);
+	ptr.mid = mid_pivot(ptr.lsta, ptr.len);
+	if (ptr.len <= 5)
+		small_sort(&ptr.lsta, &ptr.lstb, ptr.mid, ptr.len);
+	else
+		large_sort(&ptr.lsta, &ptr.lstb);
 }
