@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/04/09 02:26:57 by jsilance         ###   ########.fr        #
+#    Updated: 2021/08/02 19:56:46 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 # The name of your executable
 NAME		= library.a
-NAME_EXE	= push_swap
+NAME_SWAP	= push_swap
 
 # Compiler and compiling flags
 CC	= gcc
@@ -25,6 +25,7 @@ ARFLAGS = -rcs
 # Debug, use with`make DEBUG=1`
 ifeq ($(DEBUG),1)
 CFLAGS	+= -g3 -fsanitize=address
+# CFLAGS	+= -g3
 endif
 
 # Folder name
@@ -45,22 +46,31 @@ LDFLAGS =
 
 SRCS =\
 	./src/io/get_next_line.c\
+	./src/utils/swap_utils3.c\
+	./src/utils/utils.c\
+	./src/utils/utils2.c\
+	./src/utils/swap_utils2.c\
+	./src/utils/swap_utils.c\
+	./src/print/ft_putstruct.c\
 	./src/list/ft_lstlast.c\
 	./src/list/ft_lstadd_front.c\
 	./src/list/ft_lstadd_back.c\
 	./src/list/ft_lstclear.c\
-	./src/list/lst_move.c\
 	./src/list/list_swap.c\
 	./src/list/lst_push.c\
+	./src/list/lst_dup.c\
 	./src/list/ft_lstnew.c\
 	./src/list/ft_lstiter.c\
 	./src/list/ft_lstdelone.c\
+	./src/list/lst_rot.c\
 	./src/list/ft_lstsize.c\
+	./src/swap/main.c\
+	./src/swap/swapper.c\
 
 HEADERS =\
 	./includes/get_next_line.h\
 	./includes/list.h\
-	./includes/debug_utils.h\
+	./includes/utils.h\
 
 ###▲▲▲<src-updater-do-not-edit-or-remove>▲▲▲
 
@@ -82,7 +92,7 @@ VPATH := $(SRCDIR) $(OBJDIR) $(shell find $(SRCDIR) -type d)
 # ================================== RULES =================================== #
 
 all : $(NAME)
-
+	@$(CC) $(CFLAGS) src/swap/main.c $(NAME) -o $(NAME_SWAP)
 # Compiling
 $(OBJDIR)%.o : %.c
 	@mkdir -p $(OBJDIR)
@@ -103,16 +113,10 @@ clean :
 
 fclean : clean
 	@echo "$(RE)--- Removing $(NAME)$(RC)"
-	@rm -f $(NAME) $(NAME_EXE)
+	@rm -f $(NAME) $(NAME_SWAP)
 
 # Special rule to force to remake everything
 re : fclean all
-
-# This runs the program
-run : $(NAME)
-	@echo "$(CY)>>> Running $(NAME)$(RC)"
-	$(CC) $(CFLAGS) main.c $(NAME) -o $(NAME_EXE)
-	./$(NAME_EXE)
 
 # This specifies the rules that does not correspond to any filename
 .PHONY	= all run clean fclean re
