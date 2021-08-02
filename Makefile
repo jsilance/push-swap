@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/08/02 19:14:23 by jsilance         ###   ########.fr        #
+#    Updated: 2021/08/02 19:56:46 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,6 @@ HEADERS =\
 	./includes/get_next_line.h\
 	./includes/list.h\
 	./includes/utils.h\
-	./includes/debug_utils.h\
 
 ###▲▲▲<src-updater-do-not-edit-or-remove>▲▲▲
 
@@ -92,8 +91,8 @@ VPATH := $(SRCDIR) $(OBJDIR) $(shell find $(SRCDIR) -type d)
 
 # ================================== RULES =================================== #
 
-all : $(NAME) $(NAME_CHECK)
-
+all : $(NAME)
+	@$(CC) $(CFLAGS) src/swap/main.c $(NAME) -o $(NAME_SWAP)
 # Compiling
 $(OBJDIR)%.o : %.c
 	@mkdir -p $(OBJDIR)
@@ -114,18 +113,10 @@ clean :
 
 fclean : clean
 	@echo "$(RE)--- Removing $(NAME)$(RC)"
-	@rm -f $(NAME) $(NAME_EXE)
+	@rm -f $(NAME) $(NAME_SWAP)
 
 # Special rule to force to remake everything
 re : fclean all
-
-swap: $(NAME)
-	$(CC) $(CFLAGS) src/swap/main.c $(NAME) -o $(NAME_SWAP)
-
-# This runs the program
-run : swap checker
-	@echo "$(CY)>>> Running $(NAME)$(RC)"
-	./$(NAME_SWAP) $(ARG) | ./$(NAME_CHECK) $(ARG)
 
 # This specifies the rules that does not correspond to any filename
 .PHONY	= all run clean fclean re

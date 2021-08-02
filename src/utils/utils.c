@@ -6,13 +6,11 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 05:20:08 by jsilance          #+#    #+#             */
-/*   Updated: 2021/08/02 15:51:46 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/02 19:36:12 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
-#include "debug_utils.h" // TOUT DOUX RIMAUVE BYFOURE PEUCHE
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
