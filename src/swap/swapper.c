@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 14:17:20 by jsilance          #+#    #+#             */
-/*   Updated: 2021/08/02 19:18:57 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/10 23:47:19 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,15 @@ static void	large_sort(t_list **alst, t_list **blst)
 
 int	main_swap(t_table_v *var)
 {
-	t_swap	ptr;
+	int	len;
+	int	mid;
 
 	if (!var->b && !verif_stack(var->a, 1))
 		return (1);
-	ptr = (t_swap){var->a, var->b};
-	ptr.len = ft_lstsize(ptr.lsta);
-	ptr.mid = mid_pivot(ptr.lsta, ptr.len);
-	if (ptr.len <= 5)
-		small_sort(&ptr.lsta, &ptr.lstb, ptr.mid, ptr.len);
+	len = ft_lstsize(var->a);
+	mid = mid_pivot(var->a, len);
+	if (len <= 5)
+		small_sort(&var->a, &var->b, mid, len);
 	else
-		large_sort(&ptr.lsta, &ptr.lstb);
+		large_sort(&var->a, &var->b);
 }

@@ -6,7 +6,7 @@
 #    By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/08/02 19:56:46 by jsilance         ###   ########.fr        #
+#    Updated: 2021/10/20 19:54:01 by jsilance         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRCS =\
 	./src/utils/swap_utils3.c\
 	./src/utils/utils.c\
 	./src/utils/utils2.c\
+	./src/utils/utils3.c\
+	./src/utils/satoi.c\
 	./src/utils/swap_utils2.c\
 	./src/utils/swap_utils.c\
 	./src/print/ft_putstruct.c\
@@ -117,6 +119,10 @@ fclean : clean
 
 # Special rule to force to remake everything
 re : fclean all
+
+debug:
+	@DEBUG=1 make
+	./$(NAME_SWAP) $(args)
 
 # This specifies the rules that does not correspond to any filename
 .PHONY	= all run clean fclean re

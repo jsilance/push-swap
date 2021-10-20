@@ -6,7 +6,7 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 01:04:44 by jsilance          #+#    #+#             */
-/*   Updated: 2021/08/02 15:48:18 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/10 23:47:47 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	i_push(t_list **lst, int content, int ins)
 		return ;
 	}
 	print_push(ins);
-	if (*lst == NULL)
+	if (!*lst)
 	{
 		*lst = first;
 		(*lst)->content = content;
@@ -39,7 +39,7 @@ void	i_push(t_list **lst, int content, int ins)
 		(*lst)->next = 0;
 		return ;
 	}
-	first->prev = 0;
+	first->prev = NULL;
 	first->next = *lst;
 	first->content = content;
 	(*lst)->prev = first;

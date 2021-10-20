@@ -6,12 +6,14 @@
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 23:48:45 by jsilance          #+#    #+#             */
-/*   Updated: 2021/08/02 19:18:59 by jsilance         ###   ########.fr       */
+/*   Updated: 2021/08/10 19:45:35 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include "utils.h"
+
+#include <stdio.h>
 
 int	get_len(int len)
 {
@@ -59,7 +61,7 @@ int	mid_pivot(t_list *ptr, int len)
 	while (--len)
 		tmp = tmp->next;
 	mid = tmp->content;
-	ft_lstclear(&tmp);
+	ft_lstclear(&first_nb);
 	return (mid);
 }
 

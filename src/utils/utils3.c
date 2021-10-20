@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsilance <jsilance@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 00:37:58 by jsilance          #+#    #+#             */
-/*   Updated: 2021/08/10 23:47:54 by jsilance         ###   ########.fr       */
+/*   Created: 2021/10/20 19:46:40 by jsilance          #+#    #+#             */
+/*   Updated: 2021/10/20 19:51:45 by jsilance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "utils.h"
 
-void	ft_lstnew(t_list **lst, int content)
+int	pre_test(char *s)
 {
-	t_list	*new;
-	t_list	*last;
+	char	*str;
 
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return ;
-	new->content = content;
-	new->pos = 0;
-	new->next = NULL;
-	if (!*lst)
+	str = "2147483647";
+	if (s[0] == '-')
 	{
-		new->prev = NULL;
-		*lst = new;
-		return ;
+		s++;
+		str = "2147483648";
 	}
-	last = *lst;
-	while (last->next)
-		last = last->next;
-	last->next = new;
-	new->prev = last;
-	return ;
+	if (ft_strlen(s) == 10)
+	{
+		if (ft_strcmp(str, s) < 0)
+			return (-1);
+		else
+			return (1);
+	}
+	else if (ft_strlen (s) > 10)
+		return (-1);
+	return (1);
 }
-/*
-** Ajouter un nouvel élément
-*/
